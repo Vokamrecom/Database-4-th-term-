@@ -1,0 +1,71 @@
+/*--№1
+CREATE DATABASE Alex_UNIVER;
+
+--№2
+CREATE TABLE STUDENT(
+[Номер зачётки] int,
+[Фамилия студета] nvarchar(10),
+[Номер группы] int
+);
+SELECT * FROM STUDENT;
+*/
+--№3
+ALTER TABLE STUDENT ADD [Дата поступления] date;
+SELECT * FROM STUDENT;
+ALTER TABLE STUDENT DROP COLUMN [Дата поступления];
+
+--№4
+INSERT STUDENT([Номер зачётки],[Фамилия студета],[Номер группы]) VALUES
+(71500038,'Макарец',2),
+(71500039,'Пуцыкович',2),
+(71500040,'Игнатюк',2),
+(71500041,'Якубейко',2),
+(71500042,'Малинчик',2),
+(71500043,'Наварич',2),
+(71500044,'Гринцевич',2);
+
+--№5
+SELECT * FROM STUDENT;
+SELECT [Фамилия студета] FROM STUDENT;
+SELECT [Номер зачётки],[Фамилия студета] FROM STUDENT;
+SELECT COUNT(*) FROM STUDENT;
+
+--№6
+UPDATE STUDENT SET [Номер группы]=5;
+
+--№7
+DROP TABLE STUDENT;
+
+CREATE TABLE STUDENT(
+[Номер зачётки] int CONSTRAINT PK_STUDENT PRIMARY KEY,
+[Фамилия студета] nvarchar(10) NOT NULL,
+[Номер группы] int
+);
+
+INSERT STUDENT([Номер зачётки],[Фамилия студета],[Номер группы]) VALUES
+(1002,N'Малинчик',2);
+
+CREATE TABLE STUDENT(
+NZACH int CONSTRAINT PK_STUDENT PRIMARY KEY,
+NAME nvarchar(10),
+NGROUP int NOT NULL,
+POL nchar(1) CHECK(POL IN ('м','ж'))
+);
+
+--№10
+CREATE TABLE STUDENT1(
+[Номер зачётки] int CONSTRAINT PK_STUDENT PRIMARY KEY,
+[ФИО] nvarchar(30) NOT NULL,
+[Дата рождения] date,
+[Пол] nchar(1) CHECK([Пол] IN ('м','ж')),
+[Дата поступления] date
+);
+
+INSERT STUDENT1([Номер зачётки], [ФИО], [Дата рождения], [Пол], [Дата поступления]) VALUES
+(1001,'Макарец','19970518','м','20150101'),
+(1002,'Загнетова','19960105','ж','20150101'),
+(1003,'Якубейко','19980712','ж','20150101');
+
+SELECT [ФИО]
+FROM STUDENT1
+WHERE [ПОЛ]='ж' AND (YEAR([Дата поступления])-YEAR([Дата рождения])>=18);
